@@ -1,4 +1,4 @@
- Importing pygame module
+# Importing pygame module
 
 import pygame
 from pygame.locals import *
@@ -17,8 +17,10 @@ ygravity = 1
 jumpheight = 20
 yvelocity = jumpheight
 
-ypos = 500
+ypos = 400
 run = True
+
+clock = pygame.time.Clock()
 while run:
     # Fill the scree with white color
     window.fill((255, 255, 255))
@@ -50,17 +52,18 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
-        keyspressed = pygame.key.get_pressed()
+    keyspressed = pygame.key.get_pressed()
 
-        if keyspressed[pygame.K_SPACE]:
+    if keyspressed[pygame.K_SPACE]:
             jumping = True
 
-        if jumping:
-            ypos -= yvelocity
-            yvelocity -= ygravity
-            if yvelocity < -jumpheight:
-                jumping = False
-                yvelocity = jumpheight
+    if jumping:
+        ypos -= yvelocity
+        yvelocity -= ygravity
+        if yvelocity < -jumpheight:
+            jumping = False
+            yvelocity = jumpheight
             
     # Draws the surface object to the screen.
-    pygame.display.flip()
+    pygame.display.update()
+    clock.tick(60)
