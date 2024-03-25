@@ -29,6 +29,14 @@ ypos1 = 480
 ypos2 = 480
 run = True
 
+#This part is to manually define the peaks of the hills. The points are manually generated.
+terrain_points = [
+    (0, 550), (50, 530), (100, 540), (150, 520),
+    (200, 500), (250, 480), (300, 500), (350, 520),
+    (400, 500), (450, 480), (500, 500), (550, 520),
+    (600, 540)
+]
+
 #for time
 clock = pygame.time.Clock()
 while run:
@@ -45,19 +53,36 @@ while run:
     pi = 3.141592653
      # All drawing code happens after the for loop and but
     # inside the main while done==False loop.
+
+  # Draw hills
+
+    pygame.draw.lines(window, green, False, terrain_points, 5)
   
    
- 
-    # Draw on the screen a green line from (0,0) to (50.75)
-    # 5 pixels wide.
+ # Auto adjust the x and y position of cube to nearest terrain segment
+    def adjust_cube_position(xpos, ypos):
+        for i in range(len(terrain_points) - 1):
+            if terrain_points[i][0] <= xpos <= terrain_points[i + 1][0]:
+                # Calculate the slope of the terrain segment (Generative AI-Assisted)
+                slope = ((terrain_points[i + 1][1] - terrain_points[i][1]) /
+                         (terrain_points[i + 1][0] - terrain_points[i][0]))
+                # Calculate the y-intercept of the terrain segment
+                y_intercept = terrain_points[i][1] - slope * terrain_points[i][0]
+                # Adjust ypos based on the line equation
+                ypos = slope * xpos + y_intercept - 20  # Adjust for cube height
+                break
+        return xpos, ypos
 
-    pygame.draw.line(window, green, [0, 500], [600, 500], 5)
+    # Don't touch this or else you can't jump
+    if not jumping1:
+        xpos1, ypos1 = adjust_cube_position(xpos1, ypos1)
+    if not jumping2:
+        xpos2, ypos2 = adjust_cube_position(xpos2, ypos2)
 
     cube1 = pygame.draw.rect(window, red, [xpos1, ypos1, 20, 20])
     cube2 = pygame.draw.rect(window, blue, [xpos2, ypos2, 20, 20])
 
 
-    
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
