@@ -13,11 +13,12 @@ window = pygame.display.set_mode((600, 600))
 
 jumping = False
 
-ygravity = 1
-jumpheight = 20
+ygravity = 0.5
+jumpheight = 7
 yvelocity = jumpheight
 
-ypos = 400
+xpos = 100
+ypos = 480
 run = True
 
 clock = pygame.time.Clock()
@@ -40,10 +41,13 @@ while run:
  
     # Draw on the screen a green line from (0,0) to (50.75)
     # 5 pixels wide.
+
     pygame.draw.line(window, green, [0, 500], [600, 500], 5)
 
     
-    cube = pygame.draw.rect(window, black, [350, ypos, 100, 100])
+    
+
+    cube = pygame.draw.rect(window, black, [xpos, ypos, 20, 20])
 
 
     
@@ -56,6 +60,13 @@ while run:
 
     if keyspressed[pygame.K_SPACE]:
             jumping = True
+
+    if keyspressed[pygame.K_d]:
+         xpos += 5
+
+    if keyspressed[pygame.K_a]:
+         xpos -= 5
+
 
     if jumping:
         ypos -= yvelocity
