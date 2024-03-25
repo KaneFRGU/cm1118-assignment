@@ -58,7 +58,7 @@ while run:
 
     keyspressed = pygame.key.get_pressed()
 
-    if keyspressed[pygame.K_SPACE]:
+    if keyspressed[pygame.K_w]:
             jumping = True
 
     if keyspressed[pygame.K_d]:
