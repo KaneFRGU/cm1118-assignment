@@ -11,14 +11,21 @@ pygame.init()
 # of specific dimension.
 window = pygame.display.set_mode((600, 600))
 
-jumping = False
+jumping1 = False
+jumping2 = False
 
-ygravity = 0.5
-jumpheight = 7
-yvelocity = jumpheight
+ygravity1 = 0.5
+jumpheight1 = 7
+yvelocity1 = jumpheight1
 
-xpos = 100
-ypos = 480
+ygravity2 = 0.5
+jumpheight2 = 7
+yvelocity2 = jumpheight1
+
+xpos1 = 100
+xpos2 = 400
+ypos1 = 480
+ypos2 = 480
 run = True
 
 clock = pygame.time.Clock()
@@ -44,10 +51,8 @@ while run:
 
     pygame.draw.line(window, green, [0, 500], [600, 500], 5)
 
-    
-    
-
-    cube = pygame.draw.rect(window, black, [xpos, ypos, 20, 20])
+    cube1 = pygame.draw.rect(window, red, [xpos1, ypos1, 20, 20])
+    cube2 = pygame.draw.rect(window, blue, [xpos2, ypos2, 20, 20])
 
 
     
@@ -59,22 +64,39 @@ while run:
     keyspressed = pygame.key.get_pressed()
 
     if keyspressed[pygame.K_w]:
-            jumping = True
+            jumping1 = True
 
     if keyspressed[pygame.K_d]:
-         xpos += 5
+         xpos1 += 5
 
     if keyspressed[pygame.K_a]:
-         xpos -= 5
+         xpos1 -= 5
+
+    if keyspressed[pygame.K_UP]:
+            jumping2 = True
+
+    if keyspressed[pygame.K_RIGHT]:
+         xpos2 += 5
+
+    if keyspressed[pygame.K_LEFT]:
+         xpos2 -= 5
 
 
-    if jumping:
-        ypos -= yvelocity
-        yvelocity -= ygravity
-        if yvelocity < -jumpheight:
-            jumping = False
-            yvelocity = jumpheight
-            
+
+    if jumping1:
+        ypos1 -= yvelocity1
+        yvelocity1 -= ygravity1
+        if yvelocity1 < -jumpheight1:
+            jumping1 = False
+            yvelocity1 = jumpheight1
+    
+    if jumping2:
+        ypos2 -= yvelocity2
+        yvelocity2 -= ygravity2
+        if yvelocity2 < -jumpheight2:
+            jumping2 = False
+            yvelocity2 = jumpheight2
+     
     # Draws the surface object to the screen.
     pygame.display.update()
     clock.tick(60)
