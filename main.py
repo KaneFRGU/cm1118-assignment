@@ -11,6 +11,7 @@ pygame.init()
 # of specific dimension.
 window = pygame.display.set_mode((600, 600))
 
+#2 different variables for 2 players, cant be done if variables are the same
 jumping1 = False
 jumping2 = False
 
@@ -28,6 +29,7 @@ ypos1 = 480
 ypos2 = 480
 run = True
 
+#for time
 clock = pygame.time.Clock()
 while run:
     # Fill the scree with white color
@@ -63,6 +65,7 @@ while run:
 
     keyspressed = pygame.key.get_pressed()
 
+ #player 1 controls
     if keyspressed[pygame.K_w]:
             jumping1 = True
 
@@ -72,6 +75,7 @@ while run:
     if keyspressed[pygame.K_a]:
          xpos1 -= 5
 
+ #player 2 controls
     if keyspressed[pygame.K_UP]:
             jumping2 = True
 
@@ -82,7 +86,7 @@ while run:
          xpos2 -= 5
 
 
-
+#2 different jumping states for each player
     if jumping1:
         ypos1 -= yvelocity1
         yvelocity1 -= ygravity1
