@@ -112,7 +112,7 @@ def redrawWindow():
 # N - begining bullet position (move with player cube)
 bullet = Bullet(xpos1+20, xpos2-100, 2, white)
 
-#This part is to manually define the peaks of the hills. The points are manually generated.
+# R - This part is to manually define the peaks of the hills. The points are manually generated.
 terrain_points = [
     (0, 550), (50, 530), (100, 540), (150, 520),
     (200, 500), (250, 480), (300, 500), (350, 520),
@@ -127,7 +127,7 @@ power = 0
 angle = 0
 shoot = False
 
-#for time
+# K - for time
 clock = pygame.time.Clock()
 while run:
     # Fill the scree with white color
@@ -172,12 +172,12 @@ while run:
 
 
 
-  # Draw hills
+  # R - Draw hills
 
     pygame.draw.lines(window, green, False, terrain_points, 5)
 
 
- # Auto adjust the x and y position of cube to nearest terrain segment
+ # R - Auto adjust the x and y position of cube to nearest terrain segment
     def adjust_cube_position(xpos, ypos):
         for i in range(len(terrain_points) - 1):
             if terrain_points[i][0] <= xpos <= terrain_points[i + 1][0]:
@@ -191,7 +191,7 @@ while run:
                 break
         return xpos, ypos
 
-    # Don't touch this or else you can't jump
+    # R -  Don't touch this or else you can't jump
     if not jumping2:
         xpos2, ypos2 = adjust_cube_position(xpos2, ypos2)
 
