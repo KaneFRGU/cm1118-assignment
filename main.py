@@ -38,6 +38,11 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 pi = 3.141592653
 
+# N - Creating text for mouse coordinates                                               
+font = pygame.font.SysFont(None, 24)
+
+
+
 
 # N - Creating bullet projectiles 
 # ref - https://www.youtube.com/watch?v=_gDOz7E6HVM
@@ -97,6 +102,11 @@ def redrawWindow():
     bullet.draw(window)
     pygame.draw.line(window, (0,0,0),line[0], line[1])
     pygame.display.update()
+
+    # N - display mouse coordinates
+    mousex = font.render('Mouse (X, Y) = ' + str(pygame.mouse.get_pos()), True, white)
+    window.blit(mousex, (20, 20))
+
 
 
 # N - begining bullet position (move with player cube)
