@@ -182,8 +182,13 @@ while run:
                 pos = pygame.mouse.get_pos()
                 shoot = True
                 # N - formula of the lenght of the line (because of how fast the projectile would be, divide by a number to lessen the effect of the distance)
-                speed = math.sqrt((line[1][1]-line[0][1])**2 +(line[1][0]-line[0][1])**2)/5
                 trajectory = findTrajectory(pos)
+        #K increaases the trajectory of the bulled when A or D is pressed, with 100 as the limit
+        if keyspressed[K_d] and speed < 100:
+            speed += 1
+        if keyspressed[K_a] and speed > 0:
+            speed -= 1
+        print(speed)
 
 
 
