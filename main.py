@@ -42,7 +42,19 @@ pi = 3.141592653
 font = pygame.font.SysFont(None, 24)
 
 
+# N - power bar
+class PowerBar(object):
+    def __init__(self, x, y, width, height, color):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.rect.center = (self.x + self.width / 2, self.y + self.height / 2)
+        self.color = red
 
+    def draw(self, window):
+        pygame.draw.rect(window, self.color, self.rect)
 
 # N - Creating bullet projectiles 
 # ref - https://www.youtube.com/watch?v=_gDOz7E6HVM
@@ -100,6 +112,7 @@ def findTrajectory(pos):
 def redrawFrame():
     window.fill((64,64,64))
     bullet.draw(window)
+    powerBar.draw(window)
     pygame.draw.line(window, (0,0,0),line[0], line[1])
     pygame.display.update()
 
@@ -107,7 +120,8 @@ def redrawFrame():
     mousex = font.render('Mouse (X, Y) = ' + str(pygame.mouse.get_pos()), True, white)
     window.blit(mousex, (20, 20))
 
-
+# N - making the powerbar
+powerBar = PowerBar(20, 40, 80, 10, red)
 
 # N - begining bullet position (move with player cube)
 bullet = Bullet(xpos1+20, xpos2-100, 2, white)
@@ -132,7 +146,9 @@ clock = pygame.time.Clock()
 while run:
     # Fill the scree with white color
     window.fill((255, 255, 255))
-    
+
+
+       
 
 
 
