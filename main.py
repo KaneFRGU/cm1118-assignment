@@ -236,6 +236,8 @@ while run:
 
     cube1 = pygame.draw.rect(window, red, [xpos1, ypos1, 20, 20])
     cube2 = pygame.draw.rect(window, blue, [xpos2, ypos2, 20, 20])
+
+ 
     #K - initialising power bar
     bar = pygame.draw.rect(window, [barR, barG, 0], [20, 40, speed * 4, 20])
 
@@ -244,10 +246,18 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+    # F - Creates hitbox for the bullet to allow collision with the player
+    hitbox = pygame.draw.rect(window, white, [bullet.x - 2.5, bullet.y - 2.5, 5, 5])
 
-    
 
+    # F - Creates collision with bullet and player and makes the player respawn to a random location when hit
+    if cube2.colliderect(hitbox):
+        print("You have been hit!")
+        xpos2 = random.randint(20, 580)
 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
 
  #player 2 controls
     if keyspressed[pygame.K_UP]:
