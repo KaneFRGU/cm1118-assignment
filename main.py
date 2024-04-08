@@ -120,8 +120,7 @@ def redrawFrame():
     mousex = font.render('Mouse (X, Y) = ' + str(pygame.mouse.get_pos()), True, white)
     window.blit(mousex, (20, 20))
 
-# N - making the powerbar
-powerBar = PowerBar(20, 40, 80, 10, red)
+
 
 # N - begining bullet position (move with player cube)
 bullet = Bullet(xpos1+20, xpos2-100, 2, white)
@@ -141,20 +140,33 @@ speed = 0
 trajectory = 0
 shoot = False
 
+
+# N - making the powerbar
+powerBar = PowerBar(20, 40, speed, 10, red)
+
 # K - for time
 clock = pygame.time.Clock()
+
+
+#K power bar color
+
+barR = 0
+barG = 255
 while run:
     # Fill the scree with white color
     window.fill((255, 255, 255))
 
 
-       
-
 
 
 
     if shoot:
-        # N - will need to edit the "550" for terrain colison as for now it just goes acts dependant on the y axis
+        # N - will need to edit the "550" for terrain colison as for now it just goes acts dependant on the y 
+        
+        #K increaases the trajectory of the bulled when A or D is pressed, with 100 as the limit
+        
+
+
         if bullet.y < 550:
             # N - time controls the speed of the bullet ( change if need )
             time += 0.3
@@ -174,6 +186,8 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
+        keyspressed = pygame.key.get_pressed()
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if not shoot:
                 # N - x and y for bulletTrajectory
@@ -181,13 +195,17 @@ while run:
                 y = bullet.y
                 pos = pygame.mouse.get_pos()
                 shoot = True
-                # N - formula of the lenght of the line (because of how fast the projectile would be, divide by a number to lessen the effect of the distance)
+                
                 trajectory = findTrajectory(pos)
-        #K increaases the trajectory of the bulled when A or D is pressed, with 100 as the limit
-        if keyspressed[K_d] and speed < 100:
+
+        if keyspressed[K_d] and speed < 50:
             speed += 1
+            barR += 5.1
+            barG -= 5.1
         if keyspressed[K_a] and speed > 0:
             speed -= 1
+            barR -= 5.1
+            barG += 5.1
         print(speed)
 
 
@@ -218,21 +236,16 @@ while run:
 
     cube1 = pygame.draw.rect(window, red, [xpos1, ypos1, 20, 20])
     cube2 = pygame.draw.rect(window, blue, [xpos2, ypos2, 20, 20])
+    #K - initialising power bar
+    bar = pygame.draw.rect(window, [barR, barG, 0], [20, 40, speed * 4, 20])
 
-    # F - Creates hitbox for the bullet to allow collision with the player
-    hitbox = pygame.draw.rect(window, white, [bullet.x - 2.5, bullet.y - 2.5, 5, 5])
 
-
-    # F - Creates collision with bullet and player and makes the player respawn to a random location when hit
-    if cube2.colliderect(hitbox):
-        print("You have been hit!")
-        xpos2 = random.randint(20, 580)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
-    keyspressed = pygame.key.get_pressed()
+    
 
 
 
@@ -240,10 +253,10 @@ while run:
     if keyspressed[pygame.K_UP]:
         jumping2 = True
 
-    if keyspressed[pygame.K_RIGHT] and xpos2 < 580:
+    if keyspressed[pygame.K_RIGHT]:
         xpos2 += 5
 
-    if keyspressed[pygame.K_LEFT] and xpos2 > 0:
+    if keyspressed[pygame.K_LEFT]:
         xpos2 -= 5
 
 
