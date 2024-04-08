@@ -54,50 +54,50 @@ class Bullet(object):
         self.radius = radius
         self.color = color
 
-    # N - updates/draws the bullet - used in redrawwindow 
+    # N - updates/draws the bullet - used in redrawFrame 
     def draw(self, window):
         pygame.draw.circle(window, white, (self.x,self.y), self.radius)
 
-    # N - moving x and y depedning on the angle fired by the bullet
+    # N - moving x and y depedning on the trajectory fired by the bullet
     @staticmethod
-    def ballPath(startx, starty, power, time):
-        velocityx = math.cos(angle) * power
-        velocityy = math.sin(angle) * power 
+    def bulletTrajectory(startx, starty, speed, time):
+        velocityx = math.cos(trajectory) * speed
+        velocityy = math.sin(trajectory) * speed 
 
         # N - calculating the distances depending on the time (speed)
-        distX = velocityx * time
-        distY = (velocityy * time) + ((gravity * (time ** 2)) / 2)
+        distanceX = velocityx * time
+        distanceY = (velocityy * time) + ((gravity * (time ** 2)) / 2)
 
         # N - calculating new position (round is not needed but better for program)
-        newx = round(distX + startx)
-        newy = round(starty - distY)
+        nextx = round(distanceX + startx)
+        nexty = round(starty - distanceY)
 
-        return (newx, newy)
+        return (nextx, nexty)
 
 # N - creating a circle where the middle is x and y coordinates
-def findAngle(pos):
-    sX = bullet.x
-    sY = bullet.y
+def findTrajectory(pos):
+    radianX = bullet.x
+    radianY = bullet.y
 
     try:
-        angle = math.atan((sY - pos[1]) / (sX - pos[0]))
+        trajectory = math.atan((radianY - pos[1]) / (radianX - pos[0]))
     except:
-        angle = math.pi / 2
+        trajectory = math.pi / 2
 
     # N - finds mouse coordinates and compares them to radians in the circle (refer to image: circle.png)
-    if pos[1] < sY and pos[0] > sX: # 1
-        angle = abs(angle)
-    elif pos[1] < sY and pos[0] < sX: # 2
-        angle = math.pi - angle
-    elif pos[1] > sY and pos[0] < sX: # 3
-        angle = math.pi + abs(angle)
-    elif pos[1] > sY and pos[0] > sX: # 4
-        angle = (math.pi * 2) - angle
+    if pos[1] < radianY and pos[0] > radianX: # 1
+        trajectory = abs(trajectory)
+    elif pos[1] < radianY and pos[0] < radianX: # 2
+        trajectory = math.pi - trajectory
+    elif pos[1] > radianY and pos[0] < radianX: # 3
+        trajectory = math.pi + abs(trajectory)
+    elif pos[1] > radianY and pos[0] > radianX: # 4
+        trajectory = (math.pi * 2) - trajectory
 
-    return angle
+    return trajectory
 
 # N - to redraw frames in the game will probably needd to do something similar with the cubes and terrain cuz its flickering alot now
-def redrawWindow():
+def redrawFrame():
     window.fill((64,64,64))
     bullet.draw(window)
     pygame.draw.line(window, (0,0,0),line[0], line[1])
@@ -123,8 +123,8 @@ terrain_points = [
 # N - variable setup for bullet
 run = True
 time = 0
-power = 0
-angle = 0
+speed = 0
+trajectory = 0
 shoot = False
 
 # K - for time
@@ -142,7 +142,7 @@ while run:
         if bullet.y < 550:
             # N - time controls the speed of the bullet ( change if need )
             time += 0.3
-            po = Bullet.ballPath(x, y, power, time)
+            po = Bullet.bulletTrajectory(x, y, speed, time)
             bullet.x = po[0]
             bullet.y = po[1]
         else:
@@ -152,7 +152,7 @@ while run:
             bullet.y = ypos1
 
     line = [(xpos1 + 20, ypos1), pygame.mouse.get_pos()]
-    redrawWindow()
+    redrawFrame()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -160,14 +160,14 @@ while run:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if not shoot:
-                # N - x and y for ballPath
+                # N - x and y for bulletTrajectory
                 x = bullet.x
                 y = bullet.y
                 pos = pygame.mouse.get_pos()
                 shoot = True
                 # N - formula of the lenght of the line (because of how fast the projectile would be, divide by a number to lessen the effect of the distance)
-                power = math.sqrt((line[1][1]-line[0][1])**2 +(line[1][0]-line[0][1])**2)/5
-                angle = findAngle(pos)
+                speed = math.sqrt((line[1][1]-line[0][1])**2 +(line[1][0]-line[0][1])**2)/5
+                trajectory = findTrajectory(pos)
 
 
 
