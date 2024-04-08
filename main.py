@@ -228,10 +228,10 @@ while run:
     if keyspressed[pygame.K_UP]:
         jumping2 = True
 
-    if keyspressed[pygame.K_RIGHT]:
+    if keyspressed[pygame.K_RIGHT] and xpos2 < 580:
         xpos2 += 5
 
-    if keyspressed[pygame.K_LEFT]:
+    if keyspressed[pygame.K_LEFT] and xpos2 > 0:
         xpos2 -= 5
 
 
