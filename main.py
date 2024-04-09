@@ -38,6 +38,14 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 pi = 3.141592653
 
+#font used for the scoreboard
+font = pygame.font.Font(None,36)
+
+#red and blue scores
+red_score = 0
+blue_score = 0
+
+
 # N - Creating text for mouse coordinates                                               
 font = pygame.font.SysFont(None, 24)
 
@@ -277,6 +285,10 @@ while run:
         if yvelocity2 < -jumpheight2:
             jumping2 = False
             yvelocity2 = jumpheight2
+
+ # Scoreboard display
+    score_text = font.render(f"Red: {red_score} | Blue: {blue_score}", True, black)
+    window.blit(score_text, (400, 10))
      
     # Draws the surface object to the screen.
     pygame.display.update()
