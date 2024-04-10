@@ -133,12 +133,12 @@ def redrawFrame():
 # N - begining bullet position (move with player cube)
 bullet = Bullet(xpos1+20, xpos2-100, 2, white)
 
-# R - This part is to manually define the peaks of the hills. The points are manually generated.
+# R - This part is to manually define the plateaus of the hills. The points are manually generated.
 terrain_points = [
-    (0, 550), (50, 530), (100, 540), (150, 520),
-    (200, 500), (250, 480), (300, 500), (350, 520),
-    (400, 500), (450, 480), (500, 500), (550, 520),
-    (600, 540)
+    (0, 325), (90, 325), (150, 470),
+    (200, 470), (250, 520), (300, 520),
+    (350, 480), (400, 480), (450, 550),
+    (500, 550), (550, 530), (600, 530)
 ]
 
 # N - variable setup for bullet
