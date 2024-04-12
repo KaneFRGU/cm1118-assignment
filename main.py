@@ -1,6 +1,7 @@
 # Importing pygame module
 import math
 import pygame
+import random
 from pygame.locals import *
  
 # initiate pygame and give permission
@@ -123,7 +124,7 @@ def redrawFrame():
     powerBar.draw(window)
     pygame.draw.line(window, (0,0,0),line[0], line[1])
     pygame.display.update()
-
+    
     # N - display mouse coordinates
     mousex = font.render('Mouse (X, Y) = ' + str(pygame.mouse.get_pos()), True, white)
     window.blit(mousex, (20, 20))
@@ -163,10 +164,6 @@ barG = 255
 while run:
     # Fill the scree with white color
     window.fill((255, 255, 255))
-
-
-
-
 
     if shoot:
         # N - will need to edit the "550" for terrain colison as for now it just goes acts dependant on the y 
@@ -257,11 +254,20 @@ while run:
     # F - Creates hitbox for the bullet to allow collision with the player
     hitbox = pygame.draw.rect(window, white, [bullet.x - 2.5, bullet.y - 2.5, 5, 5])
 
+    missBar = pygame.draw.rect(window, black, [0, 560, 600, 5])
+
 
     # F - Creates collision with bullet and player and makes the player respawn to a random location when hit
+
+
     if cube2.colliderect(hitbox):
-        print("You have been hit!")
-        xpos2 = random.randint(20, 580)
+        hit = font.render('Hit!', True, white)
+        window.blit(hit, (300, 300))
+        xpos2 = random.randint(100, 580)
+        
+    if hitbox.colliderect(missBar):
+        miss = font.render('Miss!', True, white)
+        window.blit(miss, (300, 300))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
