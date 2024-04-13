@@ -28,6 +28,11 @@ xpos1 = 50
 xpos2 = 400
 ypos1 = 300
 ypos2 = 480
+
+# F - Creates coordinates for the missBar
+barposX = 0
+barposY = 560
+
 run = True
 gravity = -5
 
@@ -268,20 +273,30 @@ while run:
     # F - Creates hitbox for the bullet to allow collision with the player
     hitbox = pygame.draw.rect(window, white, [bullet.x - 2.5, bullet.y - 2.5, 5, 5])
 
-    missBar = pygame.draw.rect(window, black, [0, 560, 600, 5])
+    # F - Creates a bar at the bottom of a window which the bullet will collide with if it misses the player
+    missBar = pygame.draw.rect(window, black, [barposX, barposY, 600, 5])
 
 
     # F - Creates collision with bullet and player and makes the player respawn to a random location when hit
-
+    hashit = False
 
     if cube2.colliderect(hitbox):
+        hashit = True
         hit = font.render('Hit!', True, white)
         window.blit(hit, (300, 300))
         xpos2 = random.randint(100, 580)
+        pygame.display.update()
+        pygame.time.delay(1000)        
+        hashit = False
+        if hashit == False:
+            bullet.x = 70
+            bullet.y = 300  
         
     if hitbox.colliderect(missBar):
         miss = font.render('Miss!', True, white)
-        window.blit(miss, (300, 300))
+        window.blit(miss, (300, 300)) 
+        pygame.display.update()
+        pygame.time.delay(1000)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
