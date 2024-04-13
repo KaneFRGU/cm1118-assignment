@@ -156,9 +156,12 @@ powerBar = PowerBar(20, 40, speed, 10, red)
 # K - for time
 clock = pygame.time.Clock()
 
+# N - wasd x and y positions
+shooterX = 0
+shooterY = 0
+
 
 #K power bar color
-
 barR = 0
 barG = 255
 while run:
@@ -184,7 +187,7 @@ while run:
             bullet.x = xpos1 + 20
             bullet.y = ypos1
 
-    line = [(xpos1 + 20, ypos1), pygame.mouse.get_pos()]
+    line = [(xpos1 + 20, ypos1), [shooterX, shooterY]]
     redrawFrame()
 
     for event in pygame.event.get():
@@ -193,31 +196,41 @@ while run:
 
         keyspressed = pygame.key.get_pressed()
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        # N - for SPACE you need to get keydown too or it wont work, if changing key you can remove this
+        if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE):
             if not shoot:
                 # N - x and y for bulletTrajectory
                 x = bullet.x
                 y = bullet.y
-                pos = pygame.mouse.get_pos()
+                pos = [shooterX, shooterY]
                 shoot = True
                 
                 trajectory = findTrajectory(pos)
 
-        if keyspressed[K_d] and speed < 50:
+        if keyspressed[K_e] and speed < 50:
             speed += 1
             barR += 5.1
             barG -= 5.1
-        if keyspressed[K_a] and speed > 0:
+        if keyspressed[K_q] and speed > 0:
             speed -= 1
             barR -= 5.1
             barG += 5.1
-        print(speed)
+        
+        # N - gets x and y position with wasd
+        if keyspressed[K_a]:
+            shooterX -= 10
+        if keyspressed[K_d]:
+            shooterX += 10
+        if keyspressed[K_w]:
+            shooterY -= 10
+        if keyspressed[K_s]:
+            shooterY += 10
+            
 
 
 
 
   # R - Draw hills
-
     pygame.draw.lines(window, green, False, terrain_points, 5)
 
 
