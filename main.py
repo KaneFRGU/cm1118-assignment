@@ -39,7 +39,7 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 pi = 3.141592653
 
-#font used for the scoreboard
+# font used for the scoreboard
 font = pygame.font.Font(None,36)
 
 #red and blue scores
@@ -47,7 +47,7 @@ red_score = 0
 blue_score = 0
 
 
-# N - Creating text for mouse coordinates                                               
+# N - Creating text shooter coordinates                                               
 font = pygame.font.SysFont(None, 24)
 
 
@@ -105,7 +105,7 @@ def findTrajectory(pos):
     except:
         trajectory = math.pi / 2
 
-    # N - finds mouse coordinates and compares them to radians in the circle (refer to image: circle.png)
+    # N - finds shooter coordinates and compares them to radians in the circle (refer to image: circle.png)
     if pos[1] < radianY and pos[0] > radianX: # 1
         trajectory = abs(trajectory)
     elif pos[1] < radianY and pos[0] < radianX: # 2
@@ -125,9 +125,9 @@ def redrawFrame():
     pygame.draw.line(window, (0,0,0),line[0], line[1])
     pygame.display.update()
     
-    # N - display mouse coordinates
-    mousex = font.render('Mouse (X, Y) = ' + str(pygame.mouse.get_pos()), True, white)
-    window.blit(mousex, (20, 20))
+    # N - display shooter coordinates
+    shooterPrint = font.render('shooter (X, Y) = ' + str(shooterX) + ', ' + str(shooterY), True, white)
+    window.blit(shooterPrint, (20, 20))
 
 
 
@@ -159,6 +159,7 @@ clock = pygame.time.Clock()
 # N - wasd x and y positions
 shooterX = 0
 shooterY = 0
+shooterpos = [shooterX, shooterY]
 
 
 #K power bar color
