@@ -1,3 +1,4 @@
+
 # Importing pygame module
 import math
 import pygame
@@ -48,8 +49,8 @@ pi = 3.141592653
 font = pygame.font.Font(None,36)
 
 #red and blue scores
-red_score = 0
-blue_score = 0
+RedScore = 0
+BlueScore = 0
 
 
 # N - Creating text shooter coordinates                                               
@@ -291,12 +292,33 @@ while run:
         if hashit == False:
             bullet.x = 70
             bullet.y = 300  
+    #L - whenever Red hits Blue a point is given to red and if red reaches 10 red wins and the game restarts
+        RedScore += 1
+        if RedScore == 10:
+            print("Red wins!")
+            WinnerMessage = font.render("Red wins!", True, (red))
+            window.blit(WinnerMessage, (250,250))
+            pygame.display.update()
+            pygame.time.delay(5000)
+            RedScore = 0
+            BlueScore = 0
+
         
     if hitbox.colliderect(missBar):
         miss = font.render('Miss!', True, white)
         window.blit(miss, (300, 300)) 
         pygame.display.update()
         pygame.time.delay(1000)
+    #L - Whenever red misses blue a point is given to blue and if blue reaches 10 blue wins and the game restarts
+        BlueScore += 1
+        if BlueScore == 10:
+            print("Blue wins!")
+            WinnerMessage = font.render("Blue wins!", True, (blue))
+            window.blit(WinnerMessage, (250,250))
+            pygame.display.update()
+            pygame.time.delay(5000)
+            BlueScore = 0
+            RedScore = 0
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -322,7 +344,7 @@ while run:
             yvelocity2 = jumpheight2
 
  # Scoreboard display
-    score_text = font.render(f"Red: {red_score} | Blue: {blue_score}", True, black)
+    score_text = font.render(f"Red: {RedScore} | Blue: {BlueScore}", True, black)
     window.blit(score_text, (400, 10))
      
     # Draws the surface object to the screen.
