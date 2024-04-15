@@ -347,6 +347,6 @@ while run:
     score_text = font.render(f"Red: {RedScore} | Blue: {BlueScore}", True, black)
     window.blit(score_text, (400, 10))
      
-    #L- Draws the surface object to the screen.
+    # Draws the surface object to the screen.
     pygame.display.update()
     clock.tick(60)
