@@ -343,10 +343,10 @@ while run:
             jumping2 = False
             yvelocity2 = jumpheight2
 
- # Scoreboard display
+ #L- Scoreboard display
     score_text = font.render(f"Red: {RedScore} | Blue: {BlueScore}", True, black)
     window.blit(score_text, (400, 10))
      
-    # Draws the surface object to the screen.
+    #L- Draws the surface object to the screen.
     pygame.display.update()
     clock.tick(60)
