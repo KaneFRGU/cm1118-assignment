@@ -275,7 +275,7 @@ while run:
     hitbox = pygame.draw.rect(window, white, [bullet.x - 2.5, bullet.y - 2.5, 5, 5])
 
     # F - Creates a bar at the bottom of a window which the bullet will collide with if it misses the player
-    missBar = pygame.draw.rect(window, black, [barposX, barposY, 600, 5])
+    missBar = pygame.draw.rect(window, (64, 64, 64), [barposX, barposY, 600, 5])
 
 
     # F - Creates collision with bullet and player and makes the player respawn to a random location when hit
