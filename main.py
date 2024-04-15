@@ -45,10 +45,10 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 pi = 3.141592653
 
-# font used for the scoreboard
+#L- font used for the scoreboard
 font = pygame.font.Font(None,36)
 
-#red and blue scores
+#L- red and blue scores
 RedScore = 0
 BlueScore = 0
 
