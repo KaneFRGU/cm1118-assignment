@@ -126,7 +126,6 @@ def redrawFrame():
     bullet.draw(window)
     powerBar.draw(window)
     pygame.draw.line(window, (0,0,0),line[0], line[1])
-    pygame.display.update()
     
     # N - display shooter coordinates
     shooterPrint = font.render('shooter (X, Y) = ' + str(shooterX) + ', ' + str(shooterY), True, white)
