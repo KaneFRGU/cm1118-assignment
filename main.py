@@ -331,9 +331,7 @@ while run:
     if keyspressed[pygame.K_LEFT]:
         xpos2 -= 5
 
-
-#2 different jumping states for each player 
-    if jumping2:
+    if jumping:
         ypos2 -= yvelocity
         yvelocity -= ygravity
         if yvelocity < -jumpheight:
