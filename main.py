@@ -338,7 +338,7 @@ while run:
             yvelocity = jumpheight
 
  #L- Scoreboard display
-    score_text = font.render(f"Red: {RedScore} | Blue: {BlueScore}", True, black)
+    ScoreMessage = font.render(f"Red: {RedScore} | Blue: {BlueScore}", True, black)
     window.blit(score_text, (400, 10))
      
     # Draws the surface object to the screen.
