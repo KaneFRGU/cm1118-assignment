@@ -14,16 +14,13 @@ pygame.init()
 window = pygame.display.set_mode((600, 600))
 
 #2 different variables for 2 players, cant be done if variables are the same
-jumping1 = False
-jumping2 = False
+jumping = False
 
-ygravity1 = 0.5
-jumpheight1 = 7
-yvelocity1 = jumpheight1
+jumpheight = 7
 
-ygravity2 = 0.5
-jumpheight2 = 7
-yvelocity2 = jumpheight1
+ygravity = 0.5
+jumpheight = 7
+yvelocity = jumpheight
 
 xpos1 = 50
 xpos2 = 400
@@ -256,7 +253,7 @@ while run:
         return xpos, ypos
 
     # R -  Don't touch this or else you can't jump
-    if not jumping2:
+    if not jumping:
         xpos2, ypos2 = adjust_cube_position(xpos2, ypos2)
 
     cube1 = pygame.draw.rect(window, red, [xpos1, ypos1, 20, 20])
@@ -326,7 +323,7 @@ while run:
 
  #player 2 controls
     if keyspressed[pygame.K_UP]:
-        jumping2 = True
+        jumping = True
 
     if keyspressed[pygame.K_RIGHT]:
         xpos2 += 5
@@ -337,11 +334,11 @@ while run:
 
 #2 different jumping states for each player 
     if jumping2:
-        ypos2 -= yvelocity2
-        yvelocity2 -= ygravity2
-        if yvelocity2 < -jumpheight2:
-            jumping2 = False
-            yvelocity2 = jumpheight2
+        ypos2 -= yvelocity
+        yvelocity -= ygravity
+        if yvelocity < -jumpheight:
+            jumping = False
+            yvelocity = jumpheight
 
  #L- Scoreboard display
     score_text = font.render(f"Red: {RedScore} | Blue: {BlueScore}", True, black)
