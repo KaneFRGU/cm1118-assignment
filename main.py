@@ -339,7 +339,7 @@ while run:
 
  #L- Scoreboard display
     ScoreMessage = font.render(f"Red: {RedScore} | Blue: {BlueScore}", True, black)
-    window.blit(score_text, (400, 10))
+    window.blit(ScoreMessage, (400, 10))
      
     # Draws the surface object to the screen.
     pygame.display.update()
